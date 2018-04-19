@@ -15,15 +15,14 @@ export class SearchComponent implements OnInit {
   people:any;
 
   findAstronauts() {
-    console.log('Finding astronauts...')
+    this.http
+      .get("http://api.open-notify.org/astros.json")
+      .toPromise()
+      .then(res => {
+        this.people = res.json().people;
+      });
   }
 
-  ngOnInit() {
-    this.http.get("http://api.open-notify.org/astros.json")
-    .toPromise()
-    .then((res) => {
-      this.people = res.json().people;
-    })
-  }
+  ngOnInit() {}
 
 }
